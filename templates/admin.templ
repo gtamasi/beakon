@@ -1,0 +1,23 @@
+package templates
+
+import (
+	"github.com/gtamasi/beakon/templates/layout"
+	"github.com/gtamasi/beakon/templates/components"
+)
+
+templ AdminWithLayout(title string) {
+	@layout.Base(title, "admin", false) {
+		@Admin()
+	}
+}
+
+templ Admin() {
+	<div class="container mx-auto">
+		<div class="flex flex-col">
+			<div class="mx-6 mt-6">
+				@components.EmployeeSearchBar()
+			</div>
+			<div hx-get="/admin/employees" hx-swap="innerHTML" hx-trigger="load"></div>
+		</div>
+	</div>
+}

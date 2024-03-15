@@ -1,0 +1,24 @@
+package templates 
+
+import (
+	"github.com/gtamasi/beakon/templates/layout"
+	"github.com/gtamasi/beakon/templates/components"
+)
+
+templ Dashboard(title string) {
+	@layout.Base(title, "dashboard", false) {
+		@DashboardMain()
+	}
+}
+
+templ DashboardMain() {
+	<div class="px-6 pt-6 2xl:container">
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			<div class="md:col-span-2 lg:col-span-1">
+				@components.EngagementCard()
+			</div>
+			@components.ParticipationCard()
+			<div id="trainingCard" hx-get="/dashboard/training-card" hx-trigger="load delay:.5s" hx-swap="innerHTML"></div>
+		</div>
+	</div>
+}
